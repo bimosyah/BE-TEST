@@ -5,6 +5,8 @@ import com.be.test.betest.repositories.PetaniRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/petani")
 public class PetaniController {
@@ -18,8 +20,20 @@ public class PetaniController {
     }
 
     @PostMapping(value = "add")
-    public String add(@RequestBody PetaniEntity param){
+    public PetaniEntity add(@RequestBody PetaniEntity param){
         petaniRepository.save(param);
-        return "suksess";
+        return param;
     }
+
+    @GetMapping(value = "getAll")
+    public List<PetaniEntity> getAllPetani(){
+        return petaniRepository.findAll();
+    }
+
+    @GetMapping(value = "getById")
+    public PetaniEntity getById(@RequestParam int id){
+        return petaniRepository.findById(id).get();
+    }
+
+
 }

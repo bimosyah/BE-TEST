@@ -35,5 +35,15 @@ public class PetaniController {
         return petaniRepository.findById(id).get();
     }
 
+    @PutMapping(value = "update")
+    public PetaniEntity updatePetani(@RequestBody PetaniEntity param){
+        return petaniRepository.save(param);
+    }
+
+    @DeleteMapping(value = "delete")
+    public String delete(@RequestParam int id){
+        petaniRepository.deleteById(id);
+        return "success delete car id: " + id;
+    }
 
 }

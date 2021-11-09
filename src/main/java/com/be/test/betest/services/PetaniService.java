@@ -13,4 +13,6 @@ public interface PetaniService {
     PetaniEntity getById(int id);
     void delete(int id);
     int totalData();
+    List<PetaniEntity> searchByName(String search);
+    List<PetaniEntity> searchByCode(String search);
 }

@@ -1,6 +1,7 @@
 package com.be.test.betest.controller;
 
 import com.be.test.betest.entities.PetaniEntity;
+import com.be.test.betest.helper.GeneratePetaniCodeHelper;
 import com.be.test.betest.helper.ValidationHelper;
 import com.be.test.betest.repositories.PetaniRepository;
 import com.be.test.betest.response.CommonResponse;
@@ -37,6 +38,10 @@ public class PetaniController {
         if (validationHelper.checkInput(param) != null){
             return commonResponseGenerator.failResponse(validationHelper.checkInput(param));
         }
+
+        GeneratePetaniCodeHelper helper = new GeneratePetaniCodeHelper();
+        int code = petaniService.totalData();
+        param.setCode(helper.getCode(code));
         return commonResponseGenerator.successResponse(petaniService.add(param),"sukses");
     }
 

@@ -44,4 +44,14 @@ public class PetaniServiceImpl implements PetaniService {
         if(total == 0) return 1;
         return total+1;
     }
+
+    @Override
+    public List<PetaniEntity> searchByName(String search) {
+        return petaniRepository.searchByName(search);
+    }
+
+    @Override
+    public List<PetaniEntity> searchByCode(String search) {
+        return petaniRepository.searchByCode(search);
+    }
 }

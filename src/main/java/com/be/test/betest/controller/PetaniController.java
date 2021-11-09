@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/petani")
+@RequestMapping(value = "api")
 public class PetaniController {
 
     @Autowired
@@ -27,12 +27,7 @@ public class PetaniController {
 
     ValidationHelper validationHelper;
 
-    @GetMapping(value = "checkAPI")
-    public CommonResponse<String> checkApi(){
-        return commonResponseGenerator.successResponse("test","Sukses api");
-    }
-
-    @PostMapping(value = "add")
+    @PostMapping(value = "petani")
     public CommonResponse<PetaniEntity> add(@RequestBody PetaniEntity param){
         validationHelper = new ValidationHelper();
         if (validationHelper.checkInput(param) != null){
@@ -45,23 +40,23 @@ public class PetaniController {
         return commonResponseGenerator.successResponse(petaniService.add(param),"sukses");
     }
 
-    @GetMapping(value = "getAll")
+    @GetMapping(value = "petani")
     public CommonResponse<List<PetaniEntity>> getAllPetani(){
         return commonResponseGenerator.successResponse(petaniService.getAll(),"sukksess");
     }
 
-    @GetMapping(value = "getById")
-    public CommonResponse<PetaniEntity> getById(@RequestParam int id){
+    @GetMapping(value = "petani/{id}")
+    public CommonResponse<PetaniEntity> getById(@PathVariable("id") int id ){
         return commonResponseGenerator.successResponse(petaniService.getById(id),"suksess");
     }
 
-    @PutMapping(value = "update")
+    @PutMapping(value = "petani")
     public CommonResponse<PetaniEntity> updatePetani(@RequestBody PetaniEntity param){
         return commonResponseGenerator.successResponse(petaniService.update(param), "sukses");
     }
 
-    @DeleteMapping(value = "delete")
-    public CommonResponse<String> delete(@RequestParam int id){
+    @DeleteMapping(value = "petani/{id}")
+    public CommonResponse<String> delete(@PathVariable("id") int id){
         petaniService.delete(id);
         return commonResponseGenerator.successResponse("","success delete car id: "+ id);
     }

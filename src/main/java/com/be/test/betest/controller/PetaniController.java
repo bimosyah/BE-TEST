@@ -61,4 +61,14 @@ public class PetaniController {
         return commonResponseGenerator.successResponse("","success delete car id: "+ id);
     }
 
+    @GetMapping(value = "petani/search/nama/{search}")
+    public CommonResponse<PetaniEntity> searchName(@PathVariable("search") String search ) {
+        return commonResponseGenerator.successResponse(petaniService.searchByName(search),search);
+    }
+
+    @GetMapping(value = "petani/search/code/{search}")
+    public CommonResponse<PetaniEntity> searchCode(@PathVariable("search") String search ) {
+        return commonResponseGenerator.successResponse(petaniService.searchByCode(search),search);
+    }
+
 }

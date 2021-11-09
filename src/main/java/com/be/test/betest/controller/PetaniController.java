@@ -4,6 +4,7 @@ import com.be.test.betest.entities.PetaniEntity;
 import com.be.test.betest.repositories.PetaniRepository;
 import com.be.test.betest.response.CommonResponse;
 import com.be.test.betest.response.CommonResponseGenerator;
+import com.be.test.betest.services.PetaniService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,9 @@ public class PetaniController {
     @Autowired
     CommonResponseGenerator commonResponseGenerator;
 
+    @Autowired
+    PetaniService petaniService;
+
     @GetMapping(value = "checkAPI")
     public CommonResponse<String> checkApi(){
         return commonResponseGenerator.successResponse("test","Sukses api");
@@ -26,28 +30,27 @@ public class PetaniController {
 
     @PostMapping(value = "add")
     public CommonResponse<PetaniEntity> add(@RequestBody PetaniEntity param){
-        petaniRepository.save(param);
-        return commonResponseGenerator.successResponse(param,"sukses");
+        return commonResponseGenerator.successResponse(petaniService.add(param),"sukses");
     }
 
     @GetMapping(value = "getAll")
     public CommonResponse<List<PetaniEntity>> getAllPetani(){
-        return commonResponseGenerator.successResponse(petaniRepository.findAll(),"sukksess");
+        return commonResponseGenerator.successResponse(petaniService.getAll(),"sukksess");
     }
 
     @GetMapping(value = "getById")
     public CommonResponse<PetaniEntity> getById(@RequestParam int id){
-        return commonResponseGenerator.successResponse(petaniRepository.findById(id).get(),"suksess");
+        return commonResponseGenerator.successResponse(petaniService.getById(id),"suksess");
     }
 
     @PutMapping(value = "update")
     public CommonResponse<PetaniEntity> updatePetani(@RequestBody PetaniEntity param){
-        return commonResponseGenerator.successResponse(petaniRepository.save(param), "sukses");
+        return commonResponseGenerator.successResponse(petaniService.update(param), "sukses");
     }
 
     @DeleteMapping(value = "delete")
     public CommonResponse<String> delete(@RequestParam int id){
-        petaniRepository.deleteById(id);
+        petaniService.delete(id);
         return commonResponseGenerator.successResponse("","success delete car id: "+ id);
     }
 

@@ -1,6 +1,7 @@
 package com.be.test.betest.controller;
 
 import com.be.test.betest.entities.PetaniEntity;
+import com.be.test.betest.helper.ValidationHelper;
 import com.be.test.betest.repositories.PetaniRepository;
 import com.be.test.betest.response.CommonResponse;
 import com.be.test.betest.response.CommonResponseGenerator;
@@ -23,6 +24,8 @@ public class PetaniController {
     @Autowired
     PetaniService petaniService;
 
+    ValidationHelper validationHelper;
+
     @GetMapping(value = "checkAPI")
     public CommonResponse<String> checkApi(){
         return commonResponseGenerator.successResponse("test","Sukses api");
@@ -30,6 +33,10 @@ public class PetaniController {
 
     @PostMapping(value = "add")
     public CommonResponse<PetaniEntity> add(@RequestBody PetaniEntity param){
+        validationHelper = new ValidationHelper();
+        if (validationHelper.checkInput(param) != null){
+            return commonResponseGenerator.failResponse(validationHelper.checkInput(param));
+        }
         return commonResponseGenerator.successResponse(petaniService.add(param),"sukses");
     }
 

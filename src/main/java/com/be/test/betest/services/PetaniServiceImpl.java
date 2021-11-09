@@ -41,6 +41,7 @@ public class PetaniServiceImpl implements PetaniService {
     @Override
     public int totalData() {
         int total = petaniRepository.findAll().size();
-        return total;
+        if(total == 0) return 1;
+        return total+1;
     }
 }

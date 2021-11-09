@@ -42,12 +42,12 @@ public class PetaniController {
 
     @GetMapping(value = "petani")
     public CommonResponse<List<PetaniEntity>> getAllPetani(){
-        return commonResponseGenerator.successResponse(petaniService.getAll(),"sukksess");
+        return commonResponseGenerator.successResponse(petaniService.getAll(),"sukses");
     }
 
     @GetMapping(value = "petani/{id}")
     public CommonResponse<PetaniEntity> getById(@PathVariable("id") int id ){
-        return commonResponseGenerator.successResponse(petaniService.getById(id),"suksess");
+        return commonResponseGenerator.successResponse(petaniService.getById(id),"sukses");
     }
 
     @PutMapping(value = "petani")
@@ -63,12 +63,12 @@ public class PetaniController {
 
     @GetMapping(value = "petani/search/nama/{search}")
     public CommonResponse<PetaniEntity> searchName(@PathVariable("search") String search ) {
-        return commonResponseGenerator.successResponse(petaniService.searchByName(search),search);
+        return commonResponseGenerator.successResponse(petaniService.searchByName(search),"sukses");
     }
 
     @GetMapping(value = "petani/search/code/{search}")
     public CommonResponse<PetaniEntity> searchCode(@PathVariable("search") String search ) {
-        return commonResponseGenerator.successResponse(petaniService.searchByCode(search),search);
+        return commonResponseGenerator.successResponse(petaniService.searchByCode(search),"sukses");
     }
 
 }

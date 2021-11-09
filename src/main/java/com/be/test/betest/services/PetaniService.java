@@ -12,4 +12,5 @@ public interface PetaniService {
     List<PetaniEntity> getAll();
     PetaniEntity getById(int id);
     void delete(int id);
+    int totalData();
 }

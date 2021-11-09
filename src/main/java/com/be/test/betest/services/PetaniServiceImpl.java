@@ -37,4 +37,10 @@ public class PetaniServiceImpl implements PetaniService {
     public void delete(int id) {
         petaniRepository.deleteById(id);
     }
+
+    @Override
+    public int totalData() {
+        int total = petaniRepository.findAll().size();
+        return total;
+    }
 }
